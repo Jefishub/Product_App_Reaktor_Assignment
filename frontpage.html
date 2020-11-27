@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Product info</title>
+</head>
+<body> 
+	<h3>Product info - Front page</h3>
+
+	<form>
+		<label>Get data from:</label>  
+        <input id="shirtsButton" type="button" value="Shirts" onclick="pageShirts()">
+        <input id="jacketsButton"  type="button" value="Jackets" onclick="pageJackets()">
+        <input id="accessoriesButton"  type="button" value="Accessories" onclick="pageAccessories()">
+	</form>
+
+
+	<div id="vastaus"></div>
+	
+     <script type="text/javascript">
+
+        function pageShirts() {
+            document.getElementById("shirtsButton").onclick = function () {
+            location.href = "shirts.html";
+            };
+        }
+
+        function pageJackets() {
+            document.getElementById("jacketsButton").onclick = function () {
+            location.href = "jackets.html";
+            };
+        }
+
+        function pageAccessories() {
+            document.getElementById("accessoriesButton").onclick = function () {
+            location.href = "accessories.html";
+            };
+        }
+
+	</script>
+</body>
+</html>

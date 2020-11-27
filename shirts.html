@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Product info</title>
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+</head>
+<body> 
+	<h3>Product info (Shirts)</h3>
+
+	<form>
+		<label>Get data from:</label>  
+        <input id="shirtsButton" type="button" value="Shirts" onclick="pageShirts()">
+        <input id="jacketsButton"  type="button" value="Jackets" onclick="pageJackets()">
+        <input id="accessoriesButton"  type="button" value="Accessories" onclick="pageAccessories()">
+	</form>
+	
+	<div class="loader-wrapper">
+		<div class="loader"></div>
+		Loading data...
+	</div>
+
+	<div id="vastaus"></div>
+	
+
+
+
+	<script type="text/javascript">
+        function pageShirts() {
+            document.getElementById("shirtsButton").onclick = function () {
+            location.href = "shirts.html";
+            };
+        }
+
+        function pageJackets() {
+            document.getElementById("jacketsButton").onclick = function () {
+            location.href = "jackets.html";
+            };
+        }
+
+        function pageAccessories() {
+            document.getElementById("accessoriesButton").onclick = function () {
+            location.href = "accessories.html";
+            };
+        }
+
+		const availabilityAPI = "https://bad-api-assignment.reaktor.com/availability/";
+		const productsAPI = "https://bad-api-assignment.reaktor.com/products/shirts";
+		
+		//getting the product json data
+		async function getProductJson() {
+			const response = await fetch(productsAPI);
+			const responseJson = await response.json();
+			return responseJson;
+		}
+
+		async function getManufacturerData(manufacturer_list){
+			const manu_json_list = [];
+			for (var i = 0; i < manufacturer_list.length;i++){
+				var response = await fetch(availabilityAPI + manufacturer_list[i]);
+				var responseJson = await response.json();
+				var manuJson = await responseJson.response;
+				manu_json_list.push(manuJson);
+			}
+			return manu_json_list;
+		}
+
+		//Getting the availability of a product (by it's id and manufacturer)
+		async function getAvailability(manufacturer, id, manu_list, manuJson_list){
+			const manuJson_index = await manu_list.indexOf(manufacturer);
+			const manufactureJson = await manuJson_list[manuJson_index];
+			const found = await findItemById(manufactureJson, id);
+			const result = await found[0].DATAPAYLOAD
+			return result;
+		}
+
+		//Filtering manufacturer database to find corresponding id and it's availability
+		async function findItemById(data, id) {
+			const new_data = await data;
+			const final_data = await new_data.filter(
+				function(new_data) {
+					return new_data.id == id.toUpperCase();
+				}
+			)
+			return final_data;
+		}
+
+		//Filtering out distinct manufacturers
+		function getManufacturerList(product_list){
+			const distinctManufacturers = [...new Set(product_list.map(x => x.manufacturer))];
+			return distinctManufacturers;
+		}
+
+		async function loadData(){
+			var product_info ="";
+			const product_list = await getProductJson(); //products list (JSON)
+			const manu_list = await getManufacturerList(product_list); //manufacturer list (string)
+			const manuJson_list = await getManufacturerData(manu_list); //manufacturers list (JSON)
+
+			for (var i=0; i < product_list.length; i++) {
+				var product_id = await product_list[i].id;
+				var product_manufacturer = await product_list[i].manufacturer;
+				var product_avalability = await getAvailability(product_manufacturer,product_id,manu_list,manuJson_list);
+				product_list[i]["availability"] = await product_avalability;
+				product_info += 
+						"<p>Product ID: " + product_list[i].id +
+						"<br>Type: " + product_list[i].type + 
+						"<br>Name: " + product_list[i].name + 
+						"<br>Color: " + product_list[i].color + 
+						"<br>Price: " + product_list[i].price + 
+						"<br>Manufacturer: " + product_list[i].manufacturer + 
+						"<br>Availability: " + product_list[i].availability + "<br></p>"; 
+			} 
+			document.getElementById("vastaus").innerHTML = product_info;
+		}
+
+
+		loadData()
+		.then(test => {
+			let loaderWrapper = document.querySelector(".loader-wrapper");
+			loaderWrapper.parentElement.removeChild(loaderWrapper);
+		}) 
+		.catch(err => {
+			document.getElementById("vastaus").innerHTML = "There was an error\nPlease try reloading";
+			console.log(err);
+			console.log("There was an error");
+		})
+
+
+	</script>
+</body>
+</html>
