@@ -17,7 +17,7 @@
 	
 	<div class="loader-wrapper">
 		<div class="loader"></div>
-		Loading data...
+		Loading data... (This might take about 20 seconds)
 	</div>
 
 	<div id="vastaus"></div>
@@ -116,9 +116,11 @@
 			loaderWrapper.parentElement.removeChild(loaderWrapper);
 		})
 		.catch(err => {
-			document.getElementById("vastaus").innerHTML = "There was an error\nPlease try reloading";
+			document.getElementById("vastaus").innerHTML = "***There was an error***\nPlease try reloading";
 			console.log(err);
 			console.log("There was an error");
+			let loaderWrapper = document.querySelector(".loader-wrapper");
+			loaderWrapper.parentElement.removeChild(loaderWrapper);
 		})
 
 

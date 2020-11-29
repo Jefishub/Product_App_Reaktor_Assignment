@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Product info</title>
+</head>
+<body> 
+    <h2>***Reaktor assignment***</h2>
+	<h3>Product info - Front page</h3>
+
+	<form>
+		<label>Get data from:</label>  
+        <input id="shirtsButton" type="button" value="Shirts" onclick="pageShirts()">
+        <input id="jacketsButton"  type="button" value="Jackets" onclick="pageJackets()">
+        <input id="accessoriesButton"  type="button" value="Accessories" onclick="pageAccessories()">
+	</form>
+
+
+    <div id="vastaus" style="width: 50%;margin-top: 2cm;">
+        <h2>My comments:</h2>
+        <p>This assignment was my first ever web application. I know it is not pretty, but it works and it was 100% made be me, which I am happy about. (Ofcourse some youtube/googling)<br><br>
+            
+            I started this assignment project on Thursday night (3 days to deadline).
+            I had not done anything like it before so I had to start from scratch (almost).
+            Basically I knew Javascript basics and remembered that in some school excercise we fetched and image or text, without actually explaining how fetching works.
+            So that's where I started, html and javascript. (no frameworks, plain html)<br><br>
+            
+            With the help of youtube I learned about fetching, .then, .catch, promises, arrow notation/function, async functions and await calls. 
+            All this was new to me but I did a good job understanding most of it. After that it was pretty much trial and error until I got my code working,
+            at least to a point where I was able to fetch API data, list products, match and find availability and then returning the collected data in a very simple way, a string.
+            There is a simple error handling in the end, which catches any errors in the whole process.<br><br>
+
+            To collect and modify data takes some time, approx 20-30 sec, which is pretty long time. Therefore I made simple loading screen. 
+            I do not have any memory handling so all data must be collected again when reloading or changing pages between products.<br><br>
+
+            All in all this assignment was really educating and a good challenge for me. I enjoyed coding and learning in the process. 
+            I understand that there are better ways to make web apps, and I am going to redo this assignment using React.
+            I had my code reviewed by my friend, and he started to teach me React on Saturday night. My friend did a goof job explaining some of the stuff like hooks and rendering. 
+            I tried to redo everything, but there just isn't enough time for me to learn, code and understand everything required at this point. So I am now sending you this version, 
+            the original html version of my project and getting reviewed on that. It does show my current skills better.<br><br>
+
+            Even thought the app isn't really good, I hope you see the potential. I will respect all criticism and will try to absorb any hints/tips you can give me.
+        </p>
+
+        <h2>The assignment</h2>
+        <p>Assignment brief for junior developers<br><br>
+            Planning on applying to our junior positions? Great, below you can find the instructions for our assignment. 
+            Remember to add the links to your solution when submitting your application.<br><br>
+            
+            Instructions<br>
+            Your client is a clothing brand that is looking for a simple web app to use in their warehouses. 
+            To do their work efficiently, the warehouse workers need a fast and simple listing page per product category, 
+            where they can check simple product and availability information from a single UI.<br><br>
+            
+            There are three product categories they are interested in for now: jackets, shirts, and accessories. 
+            Therefore, you should implement three web pages corresponding to those categories that list all the products in a given category. 
+            One requirement is to be easily able to switch between product categories quickly. You are free to implement any UI you want, 
+            as long as it can display multiple products at once in a straightforward and explicit listing. 
+            At this point, it is not necessary to implement filtering or pagination functionality on the page.<br><br>
+            
+            The client does not have a ready-made API for this purpose. Instead, they have two different legacy APIs that combined can provide the needed information. 
+            The legacy APIs are on critical-maintenance-only mode, and thus further changes to them are not possible. The client knows the APIs are not excellent, 
+            but they are asking you to work around any issues in the APIs in your new application. The client has instructed you that both APIs have an internal cache of about 5 minutes.<br><br>
+            
+            API documentation is as follows<br><br>
+            
+            GET /products/:category – Return a listing of products in a given category.<br>
+            GET /availability/:manufacturer – Return a list of availability info.<br>
+            The APIs are running at https://bad-api-assignment.reaktor.com/.<br>
+            Your task is to implement a web application that fits the client brief and host the running solution somewhere where it can be accessed publically (e.g. Heroku). 
+            Please include a link to the source code and the running application in your application.<br><br>
+            
+            Some pointers you might want to take into account<br><br>
+            
+            You can keep the UI side simpler than it would be in a real-life situation. You do not need to implement filtering, search, or pagination (unless you really want to).
+            Be mindful of page loading speed and error handling in the application code itself, but using free hosting options with long-ish startup times on the first load is fine.
+            The API is supposed to resemble working with a real-life legacy API. It has a built-in intentional failure case that you might run into while developing. To ease up reproducing the issue without needing to wait for the next random request failure, we provide a request header: x-force-error-mode. Set to allto force the failure to reproduce.
+            Have fun! We’re looking forward to seeing your solution<br><br>
+            
+            Submit your application here.</p>
+    </div>
+	
+     <script type="text/javascript">
+
+        function pageShirts() {
+            location.href = "shirts.html";
+        }
+
+        function pageJackets() {
+            location.href = "jackets.html";
+        }
+
+        function pageAccessories() {
+            location.href = "accessories.html";
+        }
+
+	</script>
+</body>
+</html>
